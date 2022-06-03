@@ -84,8 +84,8 @@ input{
     background-color: #27AE60;
     display: flex;
     flex-direction: column-reverse;
-    max-width: 150px;
-    max-height: 200px;
+    max-width: 200px;
+    /* max-width: 150px */
 }
 
 .card{
@@ -103,7 +103,39 @@ input{
 .carrinhoDeConpras{
     background-color: aqua;
     margin-top: 20px;
-    height: 500px;
+    height: 100%;
     width: 300px;
 
+}
+
+.imgCarrinho{
+    display: flex;
+    flex-direction: column-reverse;
+    max-width: 100px;
+    background-color: #333333;
+}
+
+.conteinerCarrinho{
+    margin: 10px;
+    display:flex ;
+    justify-content: space-between;
+    background-color: #27AE60;
+}
+
+.lateralEsquerdaCarrinhoCard{
+    background-color: #EB5757;
+    display: flex;
+}
+
+.categoriaCarrinho{margin-top: 10px;
+    color: #27AE60;
+}
+
+.tituloCarrinho{
+    margin-top: 10px;
+}
+
+.btnRemove{
+    cursor: pointer;
+    margin-top: 10px;
 }
