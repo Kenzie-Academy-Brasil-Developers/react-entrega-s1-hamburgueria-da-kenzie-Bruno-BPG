@@ -15,6 +15,7 @@ header{
 
 main{
     display: flex;
+    height: 100%;
     justify-content: space-evenly;
     background-color: chocolate;
 }
@@ -75,6 +76,7 @@ input{
 .conteinerGeral{
     margin-top: 20px;
     display: flex;
+    height: 700px;
     width: 725px;
     flex-wrap: wrap;
     background-color: blue;
@@ -86,11 +88,12 @@ input{
     flex-direction: column-reverse;
     max-width: 200px;
     /* max-width: 150px */
+    overflow: hidden;
 }
 
 .card{
     background-color: brown;
-    margin: 20px;
+    margin: 10px;
     width: 200px;
     height: 270px;
 }
@@ -138,4 +141,21 @@ input{
 .btnRemove{
     cursor: pointer;
     margin-top: 10px;
+}
+
+.carrinhoVazio{
+    background-color: aliceblue;
+    height: 150px;
+    
+}
+
+.carrinhoVazioTitulo{
+    padding-top: 50px;
+    margin-bottom: 0px;
+    margin-left: 60px;
+}
+
+.carrinhoVazioSubTitulo{
+    margin-top: 0px;
+    margin-left: 100px;
 }
