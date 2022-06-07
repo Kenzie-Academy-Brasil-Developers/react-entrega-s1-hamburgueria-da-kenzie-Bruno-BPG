@@ -6,7 +6,7 @@
 
 header{
     height: 75px;
-    background-color: aqua;
+    background-color: #F5F5F5;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +17,7 @@ main{
     display: flex;
     height: 100%;
     justify-content: space-evenly;
-    background-color: chocolate;
+    /* background-color: chocolate; */
 }
 
 input{
@@ -34,7 +34,7 @@ input{
 
 .divInternaCard{
     height: 150px;
-    background-color: #333333;
+    background-color: #F5F5F5;
     display: flex;
     justify-content: center;
 }
@@ -79,11 +79,11 @@ input{
     height: 700px;
     width: 725px;
     flex-wrap: wrap;
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 .divImg{
-    background-color: #27AE60;
+    background-color: #F5F5F5;
     display: flex;
     flex-direction: column-reverse;
     max-width: 200px;
@@ -92,7 +92,7 @@ input{
 }
 
 .card{
-    background-color: brown;
+    /* background-color: brown; */
     margin: 10px;
     width: 200px;
     height: 270px;
@@ -100,7 +100,7 @@ input{
 
 .informacoes{
     margin-left: 20px;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
 }
 
 .parteSuperiorCarrinhoDeConpras{
@@ -116,7 +116,8 @@ input{
 }
 
 .carrinhoDeConpras{
-    background-color: aqua;
+    /* background-color: aqua; */
+    border: solid grey 1px;
     margin-top: 20px;
     height: 100%;
     width: 300px;
@@ -143,18 +144,19 @@ input{
     display: flex;
     flex-direction: column-reverse;
     max-width: 100px;
-    background-color: #333333;
+    background-color: #E0E0E0;
 }
 
 .conteinerCarrinho{
     margin: 10px;
     display:flex ;
     justify-content: space-between;
-    background-color: #27AE60;
+    color: #333333;
+    background-color: #F5F5F5;
 }
 
 .lateralEsquerdaCarrinhoCard{
-    background-color: #EB5757;
+    background-color: #F5F5F5;
     display: flex;
 }
 

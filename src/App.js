@@ -63,7 +63,7 @@ if(filter.length >= 1){
   return 0
 }
 
-setProdutosCarrinho([...produtosCarrinho, { id: index.id, category: index.category, img: index.img, valor: index.name, price: index.price,}])
+setProdutosCarrinho([...produtosCarrinho, { id: index.id, category: index.category, img: index.img, nome: index.name, price: index.price,}])
 
 }
 
@@ -100,7 +100,8 @@ function gerarCardsCarrinho(){
         </div>
 
       <div>
-        <h4 className='tituloCarrinho'>{index.name}</h4>
+        {/* {console.log(index)} */}
+        <h4 className='tituloCarrinho'>{index.nome}</h4>
         <p className='categoriaCarrinho'>{index.category}</p>
       </div>
 
