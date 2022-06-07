@@ -32,7 +32,7 @@ input{
     
 }
 
-.ggg{
+.divInternaCard{
     height: 150px;
     background-color: #333333;
     display: flex;
@@ -103,12 +103,40 @@ input{
     background-color: whitesmoke;
 }
 
+.parteSuperiorCarrinhoDeConpras{
+    height: 65px;
+    width: 300px;
+    background-color: #27AE60;
+}
+
+.textoDaParteSuperiorCarrinhoDeConpras{
+    padding-top: 20px;
+    padding-left: 10px;
+    color: aliceblue;
+}
+
 .carrinhoDeConpras{
     background-color: aqua;
     margin-top: 20px;
     height: 100%;
     width: 300px;
 
+}
+
+.divInferiorCarrinhoDeConpras{
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnRemoverTodos{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    height: 60px;
+    width: 300px;
+    border-radius: 8px;
+    
 }
 
 .imgCarrinho{

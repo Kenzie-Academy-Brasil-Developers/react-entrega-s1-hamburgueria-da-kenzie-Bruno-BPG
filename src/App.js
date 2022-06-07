@@ -10,7 +10,6 @@ function App() {
   const [produtos, setProdutos] = useState([]);
   const [filtrar, setFiltrar] = useState([]);
 
-
   useEffect(() => {
     fetch("https://hamburgueria-kenzie-json-serve.herokuapp.com/products")
       .then((response) => response.json())
@@ -23,12 +22,6 @@ function App() {
 
   const [produtosCarrinho, setProdutosCarrinho] = useState([]);
   
-
-function pesquisaFiltro(event){
-  console.log(event.value)
-}
-
-
 function gerarCards(arr){
 
   return arr.map((index) => {
@@ -36,7 +29,7 @@ function gerarCards(arr){
       <div className="conteiner" key={index.id}>
 
         <div className="card">
-          <div className='ggg'>
+          <div className='divInternaCard'>
             <div className='divImg'>
               <img src={index.img} alt={index.name}></img>
             </div>
@@ -125,7 +118,28 @@ function calcularReduce(){
     return ""
 
   }
-  return produtosCarrinho.reduce((acumulador, item) => acumulador + item.price , 0).toLocaleString("pt-br",{style:"currency",currency:"BRL"})
+
+  return <div>
+    <div className='divInferiorCarrinhoDeConpras'>
+      <p>Total</p>
+      <p>{produtosCarrinho.reduce((acumulador, item) => acumulador + item.price , 0).toLocaleString("pt-br",{style:"currency",currency:"BRL"})}</p>
+    </div>
+    <button onClick={() => {setProdutosCarrinho([])}} className='btnRemoverTodos'>Remover Todos</button> 
+  </div> 
+}
+
+const [pesquisa, setPesquisa] = useState("")
+
+
+
+function pesquisaFiltro(event){
+  event.preventDefault()
+
+  const filter = filtrar.filter((iten)=>{
+    return true === iten.category.toLowerCase().split(" ").join("").includes(pesquisa.toLowerCase().split(" ").join(""))
+    })
+
+    setProdutos(filter)
 }
 
   return (
@@ -136,8 +150,10 @@ function calcularReduce(){
           <p className='logo'>Burguer <span className='vermelho'>Kenzie</span></p>
         </div>
         <div>
-        <input id='barraDePesquisa'></input>
-        <button onClick={()=>{pesquisaFiltro()}} className='btnPesquisa'>Pesquisar</button>
+          <form onSubmit={(event) => pesquisaFiltro(event)}> 
+          <input  id='barraDePesquisa' onChange={(event) => setPesquisa(event.target.value)}></input>
+          <button id='btnDePesquisa' type='submit' className='btnPesquisa'>Pesquisar</button>
+          </form>
         </div>
       </header>
 <main>
@@ -148,11 +164,13 @@ function calcularReduce(){
     </section>
 
     <div className='carrinhoDeConpras'>
-      <div>fsdf</div>
+      <div className='parteSuperiorCarrinhoDeConpras'>
+        <p className='textoDaParteSuperiorCarrinhoDeConpras'>Carrinho de compras</p>
+        </div>
     {gerarCardsCarrinho()}
 
     <div className='mostrarPrecoSub'>
-      <p>{calcularReduce()}</p>
+      {calcularReduce()}
     </div>
     </div>
 
