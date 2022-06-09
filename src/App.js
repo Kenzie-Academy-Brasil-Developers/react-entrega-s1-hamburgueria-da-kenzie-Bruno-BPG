@@ -1,182 +1,85 @@
-import './css.css';
-
-import {toast } from 'react-toastify';
-
-import 'react-toastify/dist/ReactToastify.css';
-
+import "./css.css";
+import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useState } from "react";
+
+import GerarCards from "./components/homeCards/gerrarCards";
+import GerarCardsCarrinho from "./components/carrinhoCards/gerrarCardsCarrinho";
+import CalcularPrecoCarrinho from "./components/carrinhoCards/calcularPrecoCarrinho";
+import pesquisaFiltro from "./components/homeCards/pesquisarFiltro";
 
 function App() {
   const [produtos, setProdutos] = useState([]);
   const [filtrar, setFiltrar] = useState([]);
+  const [produtosCarrinho, setProdutosCarrinho] = useState([]);
+
+  //salva o que foi digitado
+  const [pesquisa, setPesquisa] = useState("");
 
   useEffect(() => {
     fetch("https://hamburgueria-kenzie-json-serve.herokuapp.com/products")
       .then((response) => response.json())
-      .then((response) => 
-      {setProdutos(response)
-        setFiltrar(response)
+      .then((response) => {
+        setProdutos(response);
+        setFiltrar(response);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  const [produtosCarrinho, setProdutosCarrinho] = useState([]);
-  
-function gerarCards(arr){
-
-  return arr.map((index) => {
-    return (
-      <div className="conteiner" key={index.id}>
-
-        <div className="card">
-          <div className='divInternaCard'>
-            <div className='divImg'>
-              <img src={index.img} alt={index.name}></img>
-            </div>
-          </div>
-
-          <div className='informacoes'>
-            <h4>{index.name}</h4>
-            <p className='categoria'>{index.category}</p>
-            <p>{index.price.toLocaleString("pt-br",{style:"currency",currency:"BRL"})}</p>
-          </div>
-
-          <button onClick={()=>{addCarrinho(index)}} className='btnPadrao'>Adicionar</button>            
-
-        </div>
-
-      </div>
-    )
-  })
-  
-}
-
-function addCarrinho(index){
-// console.log(index)
-
-const filter = produtosCarrinho.filter((iten)=>{
-  return iten.id === index.id
-  })
-if(filter.length >= 1){
-  console.log(filter.length)
-  toast.error("vc ja tem um desses no carrinho")
-  return 0
-}
-
-setProdutosCarrinho([...produtosCarrinho, { id: index.id, category: index.category, img: index.img, nome: index.name, price: index.price,}])
-
-}
-
-function deletarItenCarrinho(index){
-  console.log(index)
-  const filter = produtosCarrinho.filter((iten)=>{
-    return iten.id !== index.id
-    })
-
-    setProdutosCarrinho(filter)
-
-}
-
-function gerarCardsCarrinho(){
-
-  if(produtosCarrinho.length === 0){
-    return <div className='carrinhoVazio'>
-    <h3 className='carrinhoVazioTitulo'>Sua sacola está vazia</h3>
-    <p className='carrinhoVazioSubTitulo'>Adicione itens</p>
-    </div>
-
-
-
-  }
-
-  return produtosCarrinho.map((index) => {
-    return (
-      <div className="conteinerCarrinho" key={index.id}>
-
-        <div className='lateralEsquerdaCarrinhoCard'>
-
-        <div className='imgCarrinho'>
-        <img src={index.img} alt={index.name}></img>
-        </div>
-
-      <div>
-        {/* {console.log(index)} */}
-        <h4 className='tituloCarrinho'>{index.nome}</h4>
-        <p className='categoriaCarrinho'>{index.category}</p>
-      </div>
-
-        </div>
-
-      <p className='btnRemove' onClick={()=>{deletarItenCarrinho(index)}} >remover</p> 
-
-    </div>
-    )
-  })
-}
-
-function calcularReduce(){
-  if(produtosCarrinho.length === 0){
-    return ""
-
-  }
-
-  return <div>
-    <div className='divInferiorCarrinhoDeConpras'>
-      <p>Total</p>
-      <p>{produtosCarrinho.reduce((acumulador, item) => acumulador + item.price , 0).toLocaleString("pt-br",{style:"currency",currency:"BRL"})}</p>
-    </div>
-    <button onClick={() => {setProdutosCarrinho([])}} className='btnRemoverTodos'>Remover Todos</button> 
-  </div> 
-}
-
-const [pesquisa, setPesquisa] = useState("")
-
-
-
-function pesquisaFiltro(event){
-  event.preventDefault()
-
-  const filter = filtrar.filter((iten)=>{
-    return true === iten.category.toLowerCase().split(" ").join("").includes(pesquisa.toLowerCase().split(" ").join(""))
-    })
-
-    setProdutos(filter)
-}
-
   return (
-
     <div className="App">
       <header className="App-header">
         <div>
-          <p className='logo'>Burguer <span className='vermelho'>Kenzie</span></p>
+          <p className="logo">
+            Burguer <span className="vermelho">Kenzie</span>
+          </p>
         </div>
         <div>
-          <form onSubmit={(event) => pesquisaFiltro(event)}> 
-          <input  id='barraDePesquisa' onChange={(event) => setPesquisa(event.target.value)}></input>
-          <button id='btnDePesquisa' type='submit' className='btnPesquisa'>Pesquisar</button>
+          <form
+            onSubmit={(event) =>
+              pesquisaFiltro(event, filtrar, setProdutos, pesquisa)
+            }
+          >
+            <input
+              id="barraDePesquisa"
+              onChange={(event) => setPesquisa(event.target.value)}
+            ></input>
+            <button id="btnDePesquisa" type="submit" className="btnPesquisa">
+              Pesquisar
+            </button>
           </form>
         </div>
       </header>
-<main>
 
+      <main>
+        <section className="conteinerGeral">
+          <GerarCards
+            itens={produtos}
+            salvarCarrinho={setProdutosCarrinho}
+            produtosCarrinho={produtosCarrinho}
+          >
+            {" "}
+          </GerarCards>
+        </section>
 
-    <section className='conteinerGeral'>
-       {gerarCards(produtos)}
-    </section>
+        <div className="carrinhoDeConpras">
+          <div className="parteSuperiorCarrinhoDeConpras">
+            <p className="textoDaParteSuperiorCarrinhoDeConpras">
+              Carrinho de compras
+            </p>
+          </div>
+          <GerarCardsCarrinho
+            atualizarItensCarrinho={setProdutosCarrinho}
+            produtosCarrinho={produtosCarrinho}
+          ></GerarCardsCarrinho>
 
-    <div className='carrinhoDeConpras'>
-      <div className='parteSuperiorCarrinhoDeConpras'>
-        <p className='textoDaParteSuperiorCarrinhoDeConpras'>Carrinho de compras</p>
+          <div className="mostrarPrecoSub">
+            <CalcularPrecoCarrinho
+              atualizarItensCarrinho={setProdutosCarrinho}
+              produtosDoCarrinho={produtosCarrinho}
+            ></CalcularPrecoCarrinho>
+          </div>
         </div>
-    {gerarCardsCarrinho()}
-
-    <div className='mostrarPrecoSub'>
-      {calcularReduce()}
-    </div>
-    </div>
-
-</main>
-
+      </main>
     </div>
   );
 }

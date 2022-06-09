@@ -79,7 +79,6 @@ input{
     height: 700px;
     width: 725px;
     flex-wrap: wrap;
-    /* background-color: blue; */
 }
 
 .divImg{
@@ -87,12 +86,10 @@ input{
     display: flex;
     flex-direction: column-reverse;
     max-width: 200px;
-    /* max-width: 150px */
     overflow: hidden;
 }
 
 .card{
-    /* background-color: brown; */
     margin: 10px;
     width: 200px;
     height: 270px;
@@ -100,7 +97,6 @@ input{
 
 .informacoes{
     margin-left: 20px;
-    /* background-color: whitesmoke; */
 }
 
 .parteSuperiorCarrinhoDeConpras{
