@@ -4,16 +4,15 @@ import { useEffect, useState } from "react";
 
 import GerarCards from "./components/homeCards/gerrarCards";
 import GerarCardsCarrinho from "./components/carrinhoCards/gerrarCardsCarrinho";
-import CalcularPrecoCarrinho from "./components/carrinhoCards/calcularPrecoCarrinho";
-import pesquisaFiltro from "./components/homeCards/pesquisarFiltro";
+import CalcularPrecoCarrinho from "./components/calcularPrecoCarrinho";
+import pesquisaFiltro from "./components/pesquisarFiltro";
 
 function App() {
   const [produtos, setProdutos] = useState([]);
   const [filtrar, setFiltrar] = useState([]);
   const [produtosCarrinho, setProdutosCarrinho] = useState([]);
 
-  //salva o que foi digitado
-  const [pesquisa, setPesquisa] = useState("");
+  const [inputPesquisa, setInputPesquisa] = useState("");
 
   useEffect(() => {
     fetch("https://hamburgueria-kenzie-json-serve.herokuapp.com/products")
@@ -36,12 +35,12 @@ function App() {
         <div>
           <form
             onSubmit={(event) =>
-              pesquisaFiltro(event, filtrar, setProdutos, pesquisa)
+              pesquisaFiltro(event, filtrar, setProdutos, inputPesquisa)
             }
           >
             <input
               id="barraDePesquisa"
-              onChange={(event) => setPesquisa(event.target.value)}
+              onChange={(event) => setInputPesquisa(event.target.value)}
             ></input>
             <button id="btnDePesquisa" type="submit" className="btnPesquisa">
               Pesquisar

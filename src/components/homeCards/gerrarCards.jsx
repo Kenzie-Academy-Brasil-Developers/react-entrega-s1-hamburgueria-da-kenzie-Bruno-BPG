@@ -1,4 +1,5 @@
-import { addCarrinho } from "./addCarrinho";
+import { addCarrinho } from "../addCarrinho";
+import "./css.css";
 
 const gerarCards = ({ itens, salvarCarrinho, produtosCarrinho }) => {
   return itens.map((produto) => (
